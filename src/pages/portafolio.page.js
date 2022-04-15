@@ -5,8 +5,6 @@ import { useState } from 'react';
 import { PortfolioContext } from '../contexts/Portfolio.context';
 import { useContext } from 'react';
 
-
-
 const gridImages = theme => ({
     width: '100%',
     paddingTop: '10rem',
@@ -21,7 +19,6 @@ const image = theme => ({
         width: '48.3%',
         height: '250px',
     }
-
 })
 
 const caps = theme => ({
@@ -58,7 +55,7 @@ const Portafolio = props => {
     const [ isPage, setIsPage ] = useState(portafolioList);
     const [ isActiveLink, setIsActiveLink ] = useState(false);
     const { width } = useContext(PortfolioContext);
-    const mobile = (width <= 500)
+    const mobile = (width <= 700)
   
     const shuffle = (arr) => {
         let currentIndex = arr.length

@@ -1,4 +1,4 @@
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 import IconFacebook from '../components/iconos/facebook.component';
 import IconInstagram from '../components/iconos/instagram.component';
 import IconLinkedIn from '../components/iconos/linkedin.component';
@@ -64,10 +64,10 @@ const Footer = props => {
         <Box sx={footer}>
             <Box sx={logo} onClick={() => goTo('/')} />
             <Box sx={footerAddress}>
-                <p>
+                <Typography variant='body2'>
                     Av. Pedro de Valdivia, 1215 - Of. 512 - Providencia - RM <br/>
                     +56 9 8293 6938 - contacto@packagingbrands.cl
-                </p>
+                </Typography>
             </Box>
             <Box sx={social}>
                 <a href="#">

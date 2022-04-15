@@ -37,6 +37,7 @@ const theme = createTheme({
     h5: { fontSize: '2.4rem' }, //24
     h6: { fontSize: '1.9rem' }, //19
     body1: { fontSize: '1.6rem' }, //16
+    body2: { fontSize: '1.4rem' }, //16
   },
 });
 

@@ -1,14 +1,13 @@
 import { Box, Typography } from '@mui/material';
-import { containerStyle, heroStyle } from '../styles/styles';
-import Map from '../components/imgs/map';
-import heroImg from '../img/site_contato.jpeg';
 import { footerHeight } from '../assets/globalVariables';
 import IconFacebook from '../components/iconos/facebook.component';
 import IconInstagram from '../components/iconos/instagram.component';
 import IconLinkedIn from '../components/iconos/linkedin.component';
 import nosotrosImg from '../img/designing.jpeg';
 import ciudadesImg from '../img/contacto.png';
-import { Fragment } from 'react';
+import mapVector from '../components/imgs/map.svg';
+import { PortfolioContext } from '../contexts/Portfolio.context';
+import { useContext } from 'react';
 
 const hero = theme => ({
     height: '30rem',
@@ -22,28 +21,35 @@ const container = theme => ({
     margin: '0 auto',
     display: 'flex',
     [theme.breakpoints.down('desktop')]: {
-        width: '90rem',
+        width: '95vw',
+    },
+    [theme.breakpoints.down('laptop')]: {
+        width: '100vw',
         flexDirection: 'column',
+    },
+})
+const contact = theme => ({
+    marginTop: '1.5rem',
+    minHeight: `calc(100vh - ${footerHeight} - 40rem)`,
+    background: theme.palette.secondary.light,
+    padding: '2rem',
+    [theme.breakpoints.down('laptop')]: {
+        width: '100%',
+        display: 'flex'
     }
 })
 const text = theme => ({
     width: '70%',
-    paddingRight: '10rem',
+    paddingRight: '2%',
     [theme.breakpoints.down('desktop')]: {
-        width: '100%', 
-        paddingRight: 0,
+        paddingRight: '2rem',
+    },
+    [theme.breakpoints.down('laptop')]: {
+        width: '95%', 
+        margin: '0 auto',
     }
 })
-const contact = theme => ({
-    marginTop: '1.5rem',
-    width: '30%',
-    minHeight: `calc(100vh - ${footerHeight} - 40rem)`,
-    background: theme.palette.secondary.light,
-    padding: '2rem',
-    [theme.breakpoints.down('desktop')]: {
-        width: '100%',
-    }
-})
+
 const social = theme => ({
     display: 'flex',
    '& a': {
@@ -71,8 +77,11 @@ const imgCiudades = theme => ({
 })
 
 const Contacto = props => {
+    const { width } = useContext(PortfolioContext);
+    const tablet = (width <= 900)
+
     return (
-        <Box sx={[containerStyle, {paddingTop: '10rem'}]}>
+        <Box sx={{paddingTop: '10rem'}}>
             <Box sx={hero} />
             <Box sx={container}>
                 <Box sx={text}>
@@ -95,44 +104,66 @@ const Contacto = props => {
                     </Typography>
                     <Box sx={imgCiudades} />
                 </Box>
-                <Box sx={contact}>
-                    <Fragment>
-                    <Typography sx={{color: 'white'}} variant='h6' mb={2} mt={5}>
+                { tablet ? 
+                <Box sx={[contact, {flexDirection: 'column',  textAlign: 'center', minHeight:''}]}>
+                    <Typography sx={{color: 'white', lineHeight: '1.3'}} variant='h6' mb={2} mt={2}>
                         Encuéntranos en Santiago...
                     </Typography>
-                    <Typography variant='body1' sx={{color: 'white'}} mb={3} mt={3}>
+                    <Typography variant='body1' sx={{color: 'white'}} mb={3} mt={0}>
                         Av. Pedro de Valdivia 1215, Of. 503
-                        <br/>
                         Providencia, Santiago
                         <br/>
-                        Tel.: +56 9 8293 6938
-                        <br/>
-                        <span style={{fontWeight:'600'}}>contacto@packagingbrands.cl</span>
+                        Tel.: +56 9 8293 6938 - 
+                        <span style={{fontWeight:'600'}}> contacto@packagingbrands.cl</span>
                     </Typography>
-                    <Map/>
-                    </Fragment>
-                    
-        
-                    <Typography sx={{color: 'white'}} variant='h6' mb={2} mt={5}>
-                       ... y también en Rio de Janeiro
-                    </Typography>
-                    <Typography variant='body1' sx={{color: 'white'}} mt={3}>
-                        Tel.: +56 2 2954 9416
-                        <br/>
-                        <span style={{fontWeight:'600'}}>contato@packaging.com.br</span>
-                    </Typography>
-                    <Box sx={social}>
-                        <a href="#">
-                            <IconFacebook/>
-                        </a>
-                        <a href="#">
-                            <IconInstagram/>
-                        </a>
-                        <a href="#">
-                            <IconLinkedIn/>
-                        </a>
-                    </Box>
+
+                        <Typography sx={{color: 'white', lineHeight: '1.3'}} variant='h6' mb={2} mt={2}>
+                        ... y también en Rio de Janeiro
+                        </Typography>
+                        <Typography variant='body1' sx={{color: 'white'}} mb={2} mt={0}>
+                            Tel.: +56 2 2954 9416
+                            <br/>
+                            <span style={{fontWeight:'600'}}>contato@packaging.com.br</span>
+                        </Typography>
                 </Box>
+                :
+                <Box sx={contact}>
+                <Typography sx={{color: 'white', lineHeight: '1.3'}} variant='h6' mb={2} mt={5}>
+                    Encuéntranos <br/> en Santiago...
+                </Typography>
+                <Typography variant='body1' sx={{color: 'white'}} mb={3} mt={3}>
+                    Av. Pedro de Valdivia 1215, Of. 503
+                    <br/>
+                    Providencia, Santiago
+                    <br/>
+                    Tel.: +56 9 8293 6938
+                    <br/>
+                    <span style={{fontWeight:'600'}}>contacto@packagingbrands.cl</span>
+                </Typography>
+                    <img style={{width:'90%'}} src={mapVector}/>
+
+                <Typography sx={{color: 'white', lineHeight: '1.3'}} variant='h6' mb={2} mt={5}>
+                ... y también <br/>en Rio de Janeiro
+                </Typography>
+                <Typography variant='body1' sx={{color: 'white'}} mt={3}>
+                    Tel.: +56 2 2954 9416
+                    <br/>
+                    <span style={{fontWeight:'600'}}>contato@packaging.com.br</span>
+                </Typography>
+                <Box sx={social}>
+                    <a href="#">
+                        <IconFacebook/>
+                    </a>
+                    <a href="#">
+                        <IconInstagram/>
+                    </a>
+                    <a href="#">
+                        <IconLinkedIn/>
+                    </a>
+                </Box>
+            </Box>
+            }
+               
             </Box>
         </Box>
         
