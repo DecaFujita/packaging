@@ -23,7 +23,6 @@ const globalStyle = theme => ({
     //   background: #1EB5D7;
     //   color: white;
     // }
-    
 });
 
 const containerStyle = theme => ({ 
