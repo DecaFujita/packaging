@@ -12,12 +12,13 @@ import { useContext } from 'react';
 
 const galleryGrid = theme => ({
     display: 'grid',
-    gridTemplateColumns: 'repeat(3, 1fr)',
+    gridTemplateColumns: '1fr repeat(3, 40rem) 1fr',
     gridTemplateRows: 'repeat(4, 40rem)',
     [theme.breakpoints.down('desktop')]: {
+        gridTemplateColumns: '1fr repeat(3, 30rem) 1fr',
         gridTemplateRows: 'repeat(4, 30rem)',
     },
-    [theme.breakpoints.down('mobile')]: {
+    [theme.breakpoints.down('tablet')]: {
         gridTemplateColumns: 'repeat(2, 50vw)',
         gridTemplateRows: 'repeat(5, 25rem)',
     },
@@ -25,10 +26,11 @@ const galleryGrid = theme => ({
 })
 
 const gallery = theme => ({
-    gridColumn: '1/2',
+    gridColumn: '2/3',
     gridRows: '1/2',
     marginRight: '5rem',
-    [theme.breakpoints.down('mobile')]: {
+    [theme.breakpoints.down('tablet')]: {
+        gridColumn: '1/2',
         // width: '50vw', 
         marginRight: '0',
         marginLeft: '2rem'
@@ -40,7 +42,7 @@ const gallery = theme => ({
         lineHeight: '4rem',
         fontWeight: '700',
         color: theme.palette.primary.main,
-        [theme.breakpoints.down('mobile')]: {
+        [theme.breakpoints.down('tablet')]: {
             fontSize: '3rem',
             lineHeight: '3rem',
         },
@@ -52,7 +54,7 @@ const gallery = theme => ({
         letterSpacing: '.15rem',
         lineHeight: '2.5rem',
         color: theme.palette.secondary.main,
-        [theme.breakpoints.down('mobile')]: {
+        [theme.breakpoints.down('tablet')]: {
             fontSize: '2rem',
             lineHeight: '2.5rem',
         },
@@ -65,20 +67,20 @@ const galleryImg = theme => ({
 
 const SectionGallery = props => {
     const { width } = useContext(PortfolioContext);
-    const mobile = (width <= 500)
+    const mobile = (width <= 700)
     return (
     <Box sx={galleryGrid}> 
         <Box sx={gallery}>
             <h2>Somos<br/>especialistas.</h2>
             <h3>Entregamos planificación, diseño, comunicación y experiencia.</h3>
         </Box>
-        <Box sx={[galleryImg, {gridColumn: '2/3', gridRow: '1/2', backgroundImage: `url(${ballerina_pro})`}]}/>
-        <Box sx={[galleryImg, {gridColumn: mobile ? '2/3' : '3/4', gridRow:  mobile ? '3/4' : '1/2', backgroundImage: `url(${colun_cafe})`}]}/>
-        <Box sx={[galleryImg, {gridColumn: '1/3', gridRow: '2/3', backgroundImage:  `url(${lipi_plus})`}]}/>
-        <Box sx={[galleryImg, {gridColumn: '1/2', gridRow: mobile ? '3/4' : '3/5', backgroundImage: `url(${yo})`}]}/>
-        <Box sx={[galleryImg, {gridColumn: mobile ? '1/3' : '2/4', gridRow: mobile ? '4/5' : '3/4', backgroundImage: `url(${estar_bien})`}]}/>
-        <Box sx={[galleryImg, {gridColumn: mobile ? '1/2' : '2/3', gridRow: mobile ? '5/6' : '4/5', backgroundImage: `url(${rayfilter})`}]}/>
-        <Box sx={[galleryImg, {gridColumn: mobile ? '2/3' : '3/4', gridRow: mobile ? '5/6' : '4/5', backgroundImage: `url(${mckay})`}]}/>
+        <Box sx={[galleryImg, {gridColumn: mobile ? '2/3' : '3/4', gridRow: '1/2', backgroundImage: `url(${ballerina_pro})`}]}/>
+        <Box sx={[galleryImg, {gridColumn: mobile ? '1/2' : '4/5', gridRow:  mobile ? '2/3' : '1/2', backgroundImage: `url(${colun_cafe})`}]}/>
+        <Box sx={[galleryImg, {gridColumn: mobile ? '1/3' : '2/4', gridRow: mobile ? '3/4' : '2/3', backgroundImage:  `url(${lipi_plus})`}]}/>
+        <Box sx={[galleryImg, {gridColumn: '2/3', gridRow: mobile ? '2/3' : '3/5', backgroundImage: `url(${yo})`}]}/>
+        <Box sx={[galleryImg, {gridColumn: mobile ? '1/3' : '3/5', gridRow: mobile ? '4/5' : '3/4', backgroundImage: `url(${estar_bien})`}]}/>
+        <Box sx={[galleryImg, {gridColumn: mobile ? '1/2' : '3/4', gridRow: mobile ? '5/6' : '4/5', backgroundImage: `url(${rayfilter})`}]}/>
+        <Box sx={[galleryImg, {gridColumn: mobile ? '2/3' : '4/5', gridRow: mobile ? '5/6' : '4/5', backgroundImage: `url(${mckay})`}]}/>
     </Box>
    )}
 

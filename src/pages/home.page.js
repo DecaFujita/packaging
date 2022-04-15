@@ -9,9 +9,7 @@ const Home = props => {
     return (
         <Fragment> 
             <SectionCarousel width={props.width}/>
-            <Box sx={containerStyle}>
-                <SectionGallery />
-            </Box> 
+            <SectionGallery />
         </Fragment>
 
     )

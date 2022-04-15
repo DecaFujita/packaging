@@ -11,7 +11,11 @@ const footer = theme => ({
     marginTop: '1.5rem',
     padding: '3rem 5rem',
     display: 'flex',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    [theme.breakpoints.down('tablet')]: {
+        display: 'block'
+    }
+
 })
 
 const social = theme => ({
@@ -26,20 +30,30 @@ const social = theme => ({
         '& svg': {
             height: '2.5rem',
         }
+    },
+    [theme.breakpoints.down('tablet')]: {
+        justifyContent: 'center',
+        marginTop: '2rem'
     }
 })
 
 const footerAddress = theme => ({
     color: 'white',
     fontWeight: '600',
-    textAlign: 'center'
+    textAlign: 'center',
+    [theme.breakpoints.down('tablet')]: {
+        fontSize: '1.4rem'
+    }
 })
 
 const logo = theme => ({
     width: '15rem',
     background: `url(${logoFooter})`,
     backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center'
+    backgroundPosition: 'center',
+    [theme.breakpoints.down('tablet')]: {
+        display: 'none'
+    }
 })
 
 const Footer = props => {
@@ -48,24 +62,24 @@ const Footer = props => {
 
     return (
         <Box sx={footer}>
-                <Box sx={logo} onClick={() => goTo('/')} />
-                <Box sx={footerAddress}>
-                    <p>
-                        Av. Pedro de Valdivia, 1215 - Of. 512 - Providencia - RM <br/>
-                        +56 9 8293 6938 - contacto@packagingbrands.cl
-                    </p>
-                </Box>
-                <Box sx={social}>
-                    <a href="#">
-                        <IconFacebook/>
-                    </a>
-                    <a href="#">
-                        <IconInstagram/>
-                    </a>
-                    <a href="#">
-                        <IconLinkedIn/>
-                    </a>
-                </Box>
+            <Box sx={logo} onClick={() => goTo('/')} />
+            <Box sx={footerAddress}>
+                <p>
+                    Av. Pedro de Valdivia, 1215 - Of. 512 - Providencia - RM <br/>
+                    +56 9 8293 6938 - contacto@packagingbrands.cl
+                </p>
+            </Box>
+            <Box sx={social}>
+                <a href="#">
+                    <IconFacebook/>
+                </a>
+                <a href="#">
+                    <IconInstagram/>
+                </a>
+                <a href="#">
+                    <IconLinkedIn/>
+                </a>
+            </Box>
         </Box>
     )
 }

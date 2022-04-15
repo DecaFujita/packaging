@@ -32,6 +32,9 @@ const containerStyle = theme => ({
     [theme.breakpoints.down('desktop')]: {
       width: '90rem',
     },
+    [theme.breakpoints.down('tablet')]: {
+      width: '60rem',
+    },
     minHeight: `calc(100vh - ${footerHeight})` ,
     fontFamily: 'Raleway, sans-serif',
     color: theme.palette.secondary.main,

@@ -14,7 +14,15 @@ const gridImages = theme => ({
     flexWrap: 'wrap'
 })
 
-const image = theme => ({ width: '32.2%', height: '330px', margin: '.5rem' })
+const image = theme => ({ 
+    width: '32.2%', 
+    height: '330px', margin: '.5rem',
+    [theme.breakpoints.down('tablet')]: {
+        width: '48.3%',
+        height: '250px',
+    }
+
+})
 
 const caps = theme => ({
     paddingTop: '3rem',
