@@ -32,7 +32,7 @@ import hogarenas from '../img/pack_mckay.jpg';
 const portafolioList = [
     {
         id: 1,
-        client: 'CenCencosud',
+        client: 'Cencosud',
         project: 'Kläuben',
         description: 'Definición de território emocional, motivadores, personalidade, branding, packaging y comunicación para a marca de electrodomésticos premium Kläuben, para a Cencosud.',
         tags: ['branding', 'packaging', 'punto de venta', 'web'],
