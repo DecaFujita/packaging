@@ -7,7 +7,11 @@ import nosotrosImg from '../img/designing.jpeg';
 import ciudadesImg from '../img/contacto.png';
 import mapVector from '../components/imgs/map.svg';
 import { PortfolioContext } from '../contexts/Portfolio.context';
-import { useContext } from 'react';
+import { useContext, useEffect, useRef } from 'react';
+
+const pageHeight = `calc(100vh - ${footerHeight} - 38rem)`
+const pageHeightLaptop = `calc(100vh - 5rem - 33rem - 8rem)`
+const pageHeightTablet = `calc(100vh - 5rem - 34rem - 12rem)`
 
 const hero = theme => ({
     height: '30rem',
@@ -22,22 +26,36 @@ const container = theme => ({
     display: 'flex',
     [theme.breakpoints.down('desktop')]: {
         width: '95vw',
+       
     },
     [theme.breakpoints.down('laptop')]: {
         width: '100vw',
         flexDirection: 'column',
+        minHeight: pageHeightLaptop
+    },
+    [theme.breakpoints.down('tablet')]: {
+        minHeight: pageHeightTablet
     },
 })
 const contact = theme => ({
     marginTop: '1.5rem',
-    minHeight: `calc(100vh - ${footerHeight} - 40rem)`,
-    background: theme.palette.secondary.light,
+    minHeight:  pageHeight,
+    background: theme.palette.primary.light,
     padding: '2rem',
     [theme.breakpoints.down('laptop')]: {
         width: '100%',
         display: 'flex'
     }
 })
+
+const contactTablet = theme => ({
+    minHeight: 0
+})
+
+const contactMobile = theme => ({
+    minHeight: 0
+})
+
 const text = theme => ({
     width: '70%',
     paddingRight: '2%',
@@ -49,6 +67,8 @@ const text = theme => ({
         margin: '0 auto',
     }
 })
+
+const title = theme => ({ color: 'white', lineHeight: '1.3' })
 
 const social = theme => ({
     display: 'flex',
@@ -78,10 +98,11 @@ const imgCiudades = theme => ({
 
 const Contacto = props => {
     const { width } = useContext(PortfolioContext);
-    const tablet = (width <= 900)
+    const tablet = (width <= 900);
+    const mobile = (width <= 700);
 
     return (
-        <Box sx={{paddingTop: '10rem'}}>
+        <Box sx={{paddingTop: '5rem'}}>
             <Box sx={hero} />
             <Box sx={container}>
                 <Box sx={text}>
@@ -104,65 +125,43 @@ const Contacto = props => {
                     </Typography>
                     <Box sx={imgCiudades} />
                 </Box>
-                { tablet ? 
-                <Box sx={[contact, {flexDirection: 'column',  textAlign: 'center', minHeight:''}]}>
-                    <Typography sx={{color: 'white', lineHeight: '1.3'}} variant='h6' mb={2} mt={2}>
-                        Encuéntranos en Santiago...
-                    </Typography>
-                    <Typography variant='body1' sx={{color: 'white'}} mb={3} mt={0}>
-                        Av. Pedro de Valdivia 1215, Of. 503
-                        Providencia, Santiago
-                        <br/>
-                        Tel.: +56 9 8293 6938 - 
-                        <span style={{fontWeight:'600'}}> contacto@packagingbrands.cl</span>
-                    </Typography>
-
-                        <Typography sx={{color: 'white', lineHeight: '1.3'}} variant='h6' mb={2} mt={2}>
-                        ... y también en Rio de Janeiro
-                        </Typography>
-                        <Typography variant='body1' sx={{color: 'white'}} mb={2} mt={0}>
-                            Tel.: +56 2 2954 9416
-                            <br/>
-                            <span style={{fontWeight:'600'}}>contato@packaging.com.br</span>
-                        </Typography>
-                </Box>
-                :
-                <Box sx={contact}>
-                <Typography sx={{color: 'white', lineHeight: '1.3'}} variant='h6' mb={2} mt={5}>
-                    Encuéntranos <br/> en Santiago...
+                
+                <Box sx={[contact, tablet && contactTablet, mobile && contactMobile,{flexDirection: tablet && 'column', textAlign: tablet && 'center'}]}>
+                <Typography sx={title} variant='h6' mb={2} mt={tablet ? 2 : 5 }>
+                    Encuéntranos {tablet ? '' : <br/>} en Santiago...
                 </Typography>
-                <Typography variant='body1' sx={{color: 'white'}} mb={3} mt={3}>
+                <Typography variant='body1' sx={{color: 'white'}} mb={tablet ? 2 : 3} mt={tablet ? 0 : 3}>
                     Av. Pedro de Valdivia 1215, Of. 503
-                    <br/>
+                    {tablet ? '' : <br/>}
                     Providencia, Santiago
                     <br/>
                     Tel.: +56 9 8293 6938
-                    <br/>
+                    {tablet ? '' : <br/>}
                     <span style={{fontWeight:'600'}}>contacto@packagingbrands.cl</span>
                 </Typography>
-                    <img style={{width:'90%'}} src={mapVector}/>
-
-                <Typography sx={{color: 'white', lineHeight: '1.3'}} variant='h6' mb={2} mt={5}>
-                ... y también <br/>en Rio de Janeiro
+                    {!tablet && <img style={{width:'90%'}} src={mapVector}/>}
+                <Typography sx={title} variant='h6' mb={2} mt={tablet ? 3 : 5}>
+                ... y también {tablet ? '' : <br/>}en Rio de Janeiro
                 </Typography>
-                <Typography variant='body1' sx={{color: 'white'}} mt={3}>
+                <Typography variant='body1' sx={{color: 'white'}} mb={1} mt={tablet ? 0 : 3}>
                     Tel.: +56 2 2954 9416
                     <br/>
                     <span style={{fontWeight:'600'}}>contato@packaging.com.br</span>
                 </Typography>
-                <Box sx={social}>
-                    <a href="#">
-                        <IconFacebook/>
-                    </a>
-                    <a href="#">
-                        <IconInstagram/>
-                    </a>
-                    <a href="#">
-                        <IconLinkedIn/>
-                    </a>
-                </Box>
+                { !tablet &&
+                    <Box sx={social}>
+                        <a href="#">
+                            <IconFacebook/>
+                        </a>
+                        <a href="#">
+                            <IconInstagram/>
+                        </a>
+                        <a href="#">
+                            <IconLinkedIn/>
+                        </a>
+                    </Box>
+                }
             </Box>
-            }
                
             </Box>
         </Box>

@@ -15,7 +15,6 @@ const footer = theme => ({
     [theme.breakpoints.down('tablet')]: {
         display: 'block'
     }
-
 })
 
 const social = theme => ({
