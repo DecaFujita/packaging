@@ -7,7 +7,7 @@ import nosotrosImg from '../img/designing.jpeg';
 import ciudadesImg from '../img/contacto.png';
 import mapVector from '../components/imgs/map.svg';
 import { PortfolioContext } from '../contexts/Portfolio.context';
-import { useContext, useEffect, useRef } from 'react';
+import { useContext } from 'react';
 
 const pageHeight = `calc(100vh - ${footerHeight} - 38rem)`
 const pageHeightLaptop = `calc(100vh - 5rem - 33rem - 8rem)`
