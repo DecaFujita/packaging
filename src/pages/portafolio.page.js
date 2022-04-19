@@ -1,28 +1,37 @@
 import { Box } from '@mui/material';
 import { containerStyle } from '../styles/styles';
 import portafolioList from '../assets/portfolioList';
-import { useState } from 'react';
-import { PortfolioContext } from '../contexts/Portfolio.context';
-import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const gridImages = theme => ({
     width: '100%',
     paddingTop: '10rem',
     display: 'flex',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    justifyContent: 'space-between'
 })
 
 const image = theme => ({ 
     width: '32.2%', 
-    height: '330px', margin: '.5rem',
+    height: '330px',
+    margin: '.5rem',
     [theme.breakpoints.down('tablet')]: {
         width: '48.3%',
-        height: '250px',
+        height: '25rem',
+    },
+    [theme.breakpoints.down('mobile')]: {
+        width: '100%',
+        height: '20rem',
+        margin: '0.2rem'
     }
+
 })
 
 const caps = theme => ({
     paddingTop: '3rem',
+    [theme.breakpoints.down('mobile')]: {
+        paddingTop: '1rem',
+    },
     position: 'relative',
     width: '100%',
     height: '100%',
@@ -52,37 +61,20 @@ const caps = theme => ({
 const seeMore = theme => ({ position: 'absolute', right: '1rem', bottom: '.5rem' })
 
 const Portafolio = props => {
-    const [ isPage, setIsPage ] = useState(portafolioList);
-    const [ isActiveLink, setIsActiveLink ] = useState(false);
-    const { width } = useContext(PortfolioContext);
-    const mobile = (width <= 700)
-  
-    const shuffle = (arr) => {
-        let currentIndex = arr.length
-        while (currentIndex !== 0) {
-            let randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex--; 
-            [ arr[currentIndex], arr[randomIndex]  ] = [ arr[randomIndex], arr[currentIndex] ];
-        }
-        return arr;
-    }
-
-    const handleFilter = (val) => {
-        if (val === 'all') {
-            setIsPage(portafolioList)
-            setIsActiveLink(false)
-        } else {
-            let updatedList = portafolioList.filter(item => item.tags.includes(val))
-            setIsActiveLink(val)
-            setIsPage(shuffle(updatedList))
-        }
-    }
+    // const [ isPage, setIsPage ] = useState(portafolioList);
+    // const isPage = useRef(portafolioList);
+    
+    const navigate = useNavigate();
 
     return (
         <Box sx={containerStyle}>
             <Box sx={gridImages}>                     
-                {isPage.map((item, index) => 
-                    <Box key={index} sx={[image, {backgroundImage: `url(${item.img})`, backgroundSize: 'cover', backgroundPosition: 'center'}]}>
+                {portafolioList.map((item, index) => 
+                    <Box 
+                        key={index} 
+                        sx={[image, {backgroundImage: `url(${item.img})`, backgroundSize: 'cover', backgroundPosition: 'center'}]}
+                        onClick={()=> navigate(`/portafolio/${item.id}`)}
+                        >
                         <Box sx={caps}>
                             <h3>{item.client}</h3>
                             <h2>{item.project}</h2>

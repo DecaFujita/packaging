@@ -4,6 +4,7 @@ import heroYoPilates from '../../img/slide_yo_HI.jpg';
 import { useEffect } from 'react';
 import anime from 'animejs/lib/anime.es.js';
 import { Box } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const container = theme => ({ height: '100%',width: '100%' })
 
@@ -15,6 +16,10 @@ const slideFrame = theme => ({
     display: 'flex',
     background: 'grey',
     position: 'relative',
+})
+
+const slideImg = theme => ({
+    cursor: 'pointer'
 })
 
 const img = theme => ({ width: '25%', backgroundSize: 'cover' })
@@ -37,6 +42,7 @@ const dot = theme => ({
 })
 
 const SlideShow = props => {
+    const navigate = useNavigate();
     
     const tl = anime.timeline({ easing: 'easeOutExpo', loop: true, duration: 3000 });
 
@@ -55,10 +61,10 @@ const SlideShow = props => {
     <Box sx={container}>
         <Box sx={slideshow}>
             <Box id='slide' sx={slideFrame}>
-                <Box sx={[{ background: `url(${heroYoPilates})`}, img]}/>
-                <Box sx={[{ background: `url(${heroKlauben})`}, img]}/>
-                <Box sx={[{ background: `url(${heroWrapioca})`}, img]}/>
-                <Box sx={[{ background: `url(${heroYoPilates})`}, img]}/>
+                <Box sx={[slideImg, { background: `url(${heroYoPilates})`}, img]} onClick={() => navigate('/portafolio/2')} />
+                <Box sx={[slideImg, { background: `url(${heroKlauben})`}, img]} onClick={() => navigate('/portafolio/1')} />
+                <Box sx={[slideImg, { background: `url(${heroWrapioca})`}, img]} onClick={() => navigate('/portafolio/3')} />
+                <Box sx={[slideImg, { background: `url(${heroYoPilates})`}, img]} onClick={() => navigate('/portafolio/2')} />
             </Box> 
         </Box>
         <Box sx={slideshowDots}>

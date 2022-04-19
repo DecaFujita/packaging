@@ -34,6 +34,9 @@ const containerStyle = theme => ({
     [theme.breakpoints.down('tablet')]: {
       width: '60rem',
     },
+    [theme.breakpoints.down('mobile')]: {
+      width: '100%',
+    },
     minHeight: `calc(100vh - ${footerHeight})` ,
     fontFamily: 'Raleway, sans-serif',
     color: theme.palette.secondary.main,

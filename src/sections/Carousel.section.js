@@ -98,12 +98,8 @@ const SectionCarousel = props => {
     <Box sx={carouselSection}>
         <Box sx={section1}>
             <Box sx={openText}>
-                <h2>Somos
-                    { width > 500 ? <br/> : ' ' }
-                una agencia</h2>
-                <h1>full
-                    <br/>
-                    branding</h1>
+                <h2>Somos { width > 500 ? <br/> : ' ' } una agencia</h2>
+                <h1>full<br/>branding</h1>
                 <Box sx={bar}></Box>
             </Box>
         </Box>
