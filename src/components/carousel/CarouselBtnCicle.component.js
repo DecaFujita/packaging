@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { fontWeight } from '@mui/system';
+import { useNavigate } from 'react-router-dom';
 
 const btnCircle = theme => ({
     display: 'flex',
@@ -7,7 +7,6 @@ const btnCircle = theme => ({
     width: '9rem',
     borderRadius: '50%',
     background: theme.palette.primary.main,
-    display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
@@ -15,6 +14,7 @@ const btnCircle = theme => ({
     bottom: '2rem',
     zIndex: '2',
     transform: 'traslateX(10rem)',
+    cursor: 'pointer',
     '& p': {
         textAlign: 'center',
         fontFamily: 'Raleway',
@@ -35,12 +35,14 @@ const btnCircle = theme => ({
     },
 })
 
-const CarouselBtnCicle = props => (
-    <Box sx={btnCircle}>
+const CarouselBtnCicle = props => {
+    const navigate = useNavigate();
+    return (
+    <Box sx={btnCircle} onClick={()=>navigate('/portafolio')}>
         <p>
             Conozca este proyecto
         </p>
     </Box>
-);
+)};
 
 export default CarouselBtnCicle;

@@ -8,6 +8,7 @@ import rayfilter from '../img/brand_rayfilter.jpg';
 import mckay from '../img/pack_mckay.jpg';
 import { PortfolioContext } from '../contexts/Portfolio.context';
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 const galleryGrid = theme => ({
@@ -63,10 +64,12 @@ const gallery = theme => ({
 
 const galleryImg = theme => ({
     backgroundSize:'cover', backgroundPosition: 'center', 
+    cursor: 'pointer',
 })
 
 const SectionGallery = props => {
     const { width } = useContext(PortfolioContext);
+    const navigate = useNavigate();
     const mobile = (width <= 700)
     return (
     <Box sx={galleryGrid}> 
@@ -74,13 +77,13 @@ const SectionGallery = props => {
             <h2>Somos<br/>especialistas.</h2>
             <h3>Entregamos planificación, diseño, comunicación y experiencia.</h3>
         </Box>
-        <Box sx={[galleryImg, {gridColumn: mobile ? '2/3' : '3/4', gridRow: '1/2', backgroundImage: `url(${ballerina_pro})`}]}/>
-        <Box sx={[galleryImg, {gridColumn: mobile ? '1/2' : '4/5', gridRow:  mobile ? '2/3' : '1/2', backgroundImage: `url(${colun_cafe})`}]}/>
-        <Box sx={[galleryImg, {gridColumn: mobile ? '1/3' : '2/4', gridRow: mobile ? '3/4' : '2/3', backgroundImage:  `url(${lipi_plus})`}]}/>
-        <Box sx={[galleryImg, {gridColumn: '2/3', gridRow: mobile ? '2/3' : '3/5', backgroundImage: `url(${yo})`}]}/>
-        <Box sx={[galleryImg, {gridColumn: mobile ? '1/3' : '3/5', gridRow: mobile ? '4/5' : '3/4', backgroundImage: `url(${estar_bien})`}]}/>
-        <Box sx={[galleryImg, {gridColumn: mobile ? '1/2' : '3/4', gridRow: mobile ? '5/6' : '4/5', backgroundImage: `url(${rayfilter})`}]}/>
-        <Box sx={[galleryImg, {gridColumn: mobile ? '2/3' : '4/5', gridRow: mobile ? '5/6' : '4/5', backgroundImage: `url(${mckay})`}]}/>
+        <Box sx={[galleryImg, {gridColumn: mobile ? '2/3' : '3/4', gridRow: '1/2', backgroundImage: `url(${ballerina_pro})`}]} onClick={()=>navigate('/portafolio/1')}/>
+        <Box sx={[galleryImg, {gridColumn: mobile ? '1/2' : '4/5', gridRow:  mobile ? '2/3' : '1/2', backgroundImage: `url(${colun_cafe})`}]} onClick={()=>navigate('/portafolio/1')}/>
+        <Box sx={[galleryImg, {gridColumn: mobile ? '1/3' : '2/4', gridRow: mobile ? '3/4' : '2/3', backgroundImage:  `url(${lipi_plus})`}]} onClick={()=>navigate('/portafolio/1')}/>
+        <Box sx={[galleryImg, {gridColumn: '2/3', gridRow: mobile ? '2/3' : '3/5', backgroundImage: `url(${yo})`}]} onClick={()=>navigate('/portafolio/2')} />
+        <Box sx={[galleryImg, {gridColumn: mobile ? '1/3' : '3/5', gridRow: mobile ? '4/5' : '3/4', backgroundImage: `url(${estar_bien})`}]} onClick={()=>navigate('/portafolio/1')} />
+        <Box sx={[galleryImg, {gridColumn: mobile ? '1/2' : '3/4', gridRow: mobile ? '5/6' : '4/5', backgroundImage: `url(${rayfilter})`}]} onClick={()=>navigate('/portafolio/1')} />
+        <Box sx={[galleryImg, {gridColumn: mobile ? '2/3' : '4/5', gridRow: mobile ? '5/6' : '4/5', backgroundImage: `url(${mckay})`}]} onClick={()=>navigate('/portafolio/1')} />
     </Box>
    )}
 

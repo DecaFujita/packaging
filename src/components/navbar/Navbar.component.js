@@ -27,6 +27,7 @@ const navlogo = theme => ({
     background: `url(${logoPackaging})`,
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
+    cursor: 'pointer',
     [theme.breakpoints.down('laptop')]: { // change it to mobile later! 
       width: '20rem',
       marginLeft: '2rem', 
