@@ -7,6 +7,9 @@ const globalStyle = theme => ({
     'html': {
       fontSize: '62.5%',
       [theme.breakpoints.down('laptop')]: {
+        fontSize: '58%',
+      },
+      [theme.breakpoints.down('tablet')]: {
         fontSize: '50%',
       },
     //   boxSizing: 'border-box',

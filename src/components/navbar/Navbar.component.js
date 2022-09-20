@@ -1,9 +1,7 @@
+import { useState, useEffect, useRef, useContext} from 'react';
+import { NavLink, useNavigate, useLocation} from "react-router-dom";
 import { Box } from '@mui/material';
 import logoPackaging  from '../../img/logo_hor.svg';
-import { useState, useEffect, useRef, useContext} from 'react';
-import { NavLink } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
-import { useLocation } from 'react-router-dom';
 import Sandwich from './Sandwich.component';
 import { PortfolioContext } from '../../contexts/Portfolio.context';
 
@@ -15,7 +13,7 @@ const navbar = theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    [theme.breakpoints.down('laptop')]: { // change it to mobile later! 
+    [theme.breakpoints.down('laptop')]: {
       height: '8rem'
     }, 
 })
@@ -28,7 +26,7 @@ const navlogo = theme => ({
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
     cursor: 'pointer',
-    [theme.breakpoints.down('laptop')]: { // change it to mobile later! 
+    [theme.breakpoints.down('laptop')]: {
       width: '20rem',
       marginLeft: '2rem', 
     }, 
@@ -60,60 +58,57 @@ const menu = theme => ({
 })
 
 const Navbar = props => {
-    const scrollRef = useRef(false);
-    const [ scrollTop, setScrollTop ] = useState(0);
-    const location = useLocation();
-    const navigate = useNavigate();
-    const goTo = (path) => { navigate(path) }
-    const  { isOpen, setIsOpen, width } = useContext(PortfolioContext);
+  const scrollRef = useRef(false);
+  const [ scrollTop, setScrollTop ] = useState(0);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const  { isOpen, setIsOpen, width } = useContext(PortfolioContext);
+  
+  const handleClick = () => { setIsOpen(!isOpen) }
 
-    const handleClick = () => {
-      setIsOpen(!isOpen)
+  useEffect(() => {
+      try {
+          window.scroll({
+            top: 0,
+            left: 0,
+            behavior: 'smooth',
+          });
+        } catch (error) {
+          // fallback for older browsers
+          window.scrollTo(0, 0);
+        }
+    }, [])
+    
+  useEffect(() => {
+    const onScroll = () => {
+      let currentPosition = window.pageYOffset; // document.documentElement.scrollTop;
+      setScrollTop(currentPosition <= 0 ? 0 : currentPosition);
     }
 
-    useEffect(() => {
-        try {
-            window.scroll({
-              top: 0,
-              left: 0,
-              behavior: 'smooth',
-            });
-          } catch (error) {
-            // fallback for older browsers
-            window.scrollTo(0, 0);
-          }
-      }, [])
-      
-    useEffect(() => {
-      const onScroll = () => {
-        let currentPosition = window.pageYOffset; // document.documentElement.scrollTop;
-        setScrollTop(currentPosition <= 0 ? 0 : currentPosition);
-      }
-  
-      window.addEventListener("scroll", onScroll);
-      return () => window.removeEventListener("scroll", onScroll);
-    }, []);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
-    useEffect(() => {
-      if (scrollTop >= 100) { scrollRef.current = true }
-      else { scrollRef.current = false }
-    }, [scrollTop])
-   
-    return (
-        <Box sx={[navbar, {background: scrollRef.current ||  location.pathname === '/portafolio' ? 'white' : '' || location.pathname === '/nosotros' ? 'white' : '' || width  < 700 ? 'white' : '', transition: 'background .2s linear'}]}>
-          <Box sx={navlogo} onClick={() => goTo('/')} />
-          { width < 700 // tablet bp
-          ? 
-            <Sandwich handleClick={handleClick} isOpen={isOpen} />
-          :
-            <Box sx={menu}>
-              <NavLink exact='true' to='/' style={({isActive}) => ({color: isActive ? '#1EB5D7' : ''})} href='/home'>Home</NavLink>
-              <NavLink exact='true' to='/portafolio' style={({isActive}) => ({color: isActive ? '#1EB5D7' : ''})}  href='/portafolio.html'>Portafolio</NavLink>
-              <NavLink exact='true' to='/nosotros' style={({isActive}) => ({color: isActive ? '#1EB5D7' : ''})}  href='/nosotros'>Nosotros</NavLink>
-            </Box>
-          }
-      </Box>
-    )
+  useEffect(() => {
+    if (scrollTop >= 100) { scrollRef.current = true }
+    else { scrollRef.current = false }
+  }, [scrollTop])
+  
+  return (
+      <Box sx={[navbar, {background: scrollRef.current ||  location.pathname === '/portafolio' || location.pathname === '/nosotros' || width  < 700 ? 'white' : '', transition: 'background .2s linear'}]}>
+        <Box sx={navlogo} onClick={() => navigate('/')} />
+        { width < 700 // tablet bp
+        ? 
+          <Sandwich handleClick={handleClick} isOpen={isOpen} />
+        :
+          <Box sx={menu}>
+            <NavLink exact='true' to='/' style={({isActive}) => ({color: isActive ? '#1EB5D7' : ''})} href='/home'>Home</NavLink>
+            <NavLink exact='true' to='/portafolio' style={({isActive}) => ({color: isActive ? '#1EB5D7' : ''})}  href='/portafolio.html'>Portafolio</NavLink>
+            <NavLink exact='true' to='/nosotros' style={({isActive}) => ({color: isActive ? '#1EB5D7' : ''})}  href='/nosotros'>Nosotros</NavLink>
+          </Box>
+        }
+    </Box>
+  )
 };
 
 export default Navbar;
